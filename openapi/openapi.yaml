@@ -1,0 +1,49 @@
+openapi: 3.1.0
+info:
+    title: TaskBoard API
+    version: 1.0.0
+paths:
+    /tasks:
+        get:
+            summary: List all tasks
+            responses:
+                "200":
+                    description: A list of tasks
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Task"
+
+    /tasks/search:
+        get:
+            summary: Search tasks
+            parameters:
+                - in: query
+                  name: query
+                  schema:
+                      type: string
+                  required: true
+                  description: Search keyword
+            responses:
+                "200":
+                    description: Successful search
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Task"
+
+components:
+    schemas:
+        Task:
+            type: object
+            properties:
+                id:
+                    type: string
+                title:
+                    type: string
+                completed:
+                    type: boolean
